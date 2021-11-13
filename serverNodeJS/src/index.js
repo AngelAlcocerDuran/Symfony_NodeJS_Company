@@ -21,7 +21,6 @@ app.use((req, res, next) => {
 
 //rutas
 app.use(require('./routes/index.js'));
-app.use('/employee', require('./routes/employee.js'));
 app.use('/office', require('./routes/office.js'));
 
 //ejecución
