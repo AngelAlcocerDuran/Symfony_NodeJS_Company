@@ -1,0 +1,46 @@
+
+
+# findAll Methods
+findAllEmployees:
+    path: /employee
+    controller: App\Controller\EmployeeController::findAll
+
+findAllOffices:
+    path: /office
+    controller: App\Controller\OfficeController::findAll
+
+# create Methods
+createEmployee:
+    path: /employee/create
+    controller: App\Controller\EmployeeController::create
+
+createOffice:
+    path: /office/create
+    controller: App\Controller\OfficeController::create
+
+# update Methods
+updateEmployee:
+    path: /employee/update/{id}
+    controller: App\Controller\EmployeeController::update
+
+updateOffice:
+    path: /office/update/{id}
+    controller: App\Controller\OfficeController::update
+
+# remove Methods
+removeEmployee:
+    path: /employee/remove/{id}
+    controller: App\Controller\EmployeeController::remove
+
+removeOffice:
+    path: /office/remove/{id}
+    controller: App\Controller\OfficeController::remove
+
+# getById Methods
+findEmployeeById:
+    path: /employee/{id}
+    controller: App\Controller\EmployeeController::getById
+
+findOfficeById:
+    path: /office/{id}
+    controller: App\Controller\OfficeController::getById

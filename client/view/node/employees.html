@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>Company | Node.js</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="../../index.html">Company (CRUD) <span class="fab fa-node-js"></span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link">Empleados</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./offices.html">Oficinas</a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="row mt-4">
+            <div class="col-9">
+                <h1 class="">Lista de Empleados</h1>
+            </div>
+            <div class="col-3 text-right">
+                <button class="btn btn-success" data-toggle="modal" data-target="#create">Añadir <i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+        <hr class="bg-dark mt-0">
+
+        <table class="table table-striped" id="table"></table>
+
+      </div>
+
+      <!-- Modal DETAIL -->
+    <div class="modal fade" id="details" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-body">
+          <h2 class="m-0">Detalles del Empleado</h2>
+          <hr class="bg-light">
+          <div class="row">
+              <div class="col-12 form-group">
+                  <label>Registrado: <span id="d_registered"></span></label>
+              </div>
+              <div class="col-12 form-group">
+                  <label>Actualizado: <span id="d_updated"></span></label>
+              </div>
+              <div class="col-6 form-group">
+                <label>Estado: <span id="d_status"></span></label>
+            </div>
+          </div>
+      </div>
+      <div class="text-right mr-3 mb-3 mt-0">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+      </div>
+      </div>
+      </div>
+  </div>
+
+      <!-- Modal CREATE -->
+    <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+          <form action="javascript:void(0);" onsubmit="create();">
+              <div class="modal-body">
+                  <h2 class="m-0">Añadir Empleado</h2>
+                  <hr class="bg-light">
+                  <div class="row">
+                      <div class="col-12 form-group">
+                          <label>Nombre: <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="c_name" name="c_name" autocomplete="off" required>
+                      </div>
+                      <div class="col-12 form-group">
+                          <label>Dirección: <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="c_address" name="c_address" autocomplete="off" required>
+                      </div>
+                      <div class="col-6 form-group">
+                        <label>Salario: <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="c_salary" name="c_salary" autocomplete="off" required>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label>Id de la Oficina: <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="c_id_off" name="c_id_off" autocomplete="off" required>
+                    </div>
+                  </div>
+              </div>
+              <div class="text-right mr-3 mb-3 mt-0">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-success">Añadir</button>
+              </div>
+          </form>
+      </div>
+      </div>
+  </div>
+
+    <!-- Modal update -->
+    <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+          <form action="javascript:void(0);" onsubmit="update();">
+              <div class="modal-body">
+                  <h2 class="m-0">Modificar Empleado</h2>
+                  <hr class="bg-light">
+                  <div class="row">
+                      <input type="hidden" id="u_id" name="u_id">
+                      <div class="col-12 form-group">
+                          <label>Nombre: <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="u_name" name="u_name" autocomplete="off" required>
+                      </div>
+                      <div class="col-12 form-group">
+                          <label>Dirección: <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="u_address" name="u_address" autocomplete="off" required>
+                      </div>
+                      <div class="col-6 form-group">
+                        <label>Salario: <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="u_salary" name="u_salary" autocomplete="off" required>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label>Id de la Oficina: <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="u_id_off" name="u_id_off" autocomplete="off" required>
+                    </div>
+                  </div>
+              </div>
+              <div class="text-right mr-3 mb-3 mt-0">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-success">Modificar</button>
+              </div>
+          </form>
+      </div>
+      </div>
+  </div>
+
+  <!-- Modal REMOVE -->
+  <div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light">
+        <form action="javascript:void(0);" onsubmit="remove();">
+            <div class="modal-body">
+                <h2 class="m-0">Eliminar Empleado</h2>
+                <hr class="bg-light">
+                <label>Se ha dado de baja al empleado</label>
+            </div>
+            <div class="text-right mr-3 mb-3 mt-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+      
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  <script src="../../js/node/employeeController.js"></script>
+
+</body>
+</html>
